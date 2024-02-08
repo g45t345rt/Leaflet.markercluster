@@ -208,7 +208,7 @@ export var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 
 		if (this._map) {
 			var started = (new Date()).getTime();
-			var process = Function.bind(function () {
+			var process = function () {
 				var start = (new Date()).getTime();
 
 				// Make sure to unspiderfy before starting to add some layers
@@ -288,7 +288,7 @@ export var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 				} else {
 					setTimeout(process, this.options.chunkDelay);
 				}
-			}, this);
+			}.bind(this)
 
 			process();
 		} else {
@@ -1065,7 +1065,7 @@ export var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 	_enqueue: function (fn) {
 		this._queue.push(fn);
 		if (!this._queueTimeout) {
-			this._queueTimeout = setTimeout(Function.bind(this._processQueue, this), 300);
+			this._queueTimeout = setTimeout(this._processQueue.bind(this), 300);
 		}
 	},
 	_processQueue: function () {
