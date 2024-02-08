@@ -432,7 +432,7 @@ L.MarkerClusterGroup.include({
 
 	_unspiderfyZoomAnim: function (zoomDetails) {
 		//Wait until the first zoomanim after the user has finished touch-zooming before running the animation
-		if (this._map._mapPane.contains('leaflet-touching')) {
+		if (this._map._mapPane.classList.contains('leaflet-touching')) {
 			return;
 		}
 
